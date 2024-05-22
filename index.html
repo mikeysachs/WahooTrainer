@@ -69,24 +69,3 @@
             <button id="backToMenuFromDevice">Back to Menu</button>
         </div>
 
-        <!-- My Trainings Menu -->
-        <div id="myTrainingsMenu" style="display: none;">
-            <h2>My Trainings</h2>
-            <ul id="trainingList"></ul>
-            <button id="backToMenuFromTrainings">Back to Menu</button>
-        </div>
-    </div>
-
-    <script type="module">
-        import init, { start_erg_mode } from './pkg/kickr_control_wasm.js';
-
-        async function runWasm() {
-            await init();
-            console.log("Wasm initialized");
-        }
-
-        runWasm();
-    </script>
-    <script src="app.js"></script>
-</body>
-</html>
