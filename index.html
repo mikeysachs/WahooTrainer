@@ -1,79 +1,92 @@
 <!DOCTYPE html>
-<script type="module">
-    import init, { start_erg_mode } from './pkg/kickr_control_wasm.js';
-
-    async function runWasm() {
-        await init();
-        start_erg_mode(200); // Example usage
-    }
-
-    runWasm();
-</script>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wahoo KICKR Training</title>
+    <title>Wahoo KICKR Training App</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="app">
+        <!-- Start Menu -->
         <div id="startMenu">
-            <button id="createTraining">Maak Training</button>
-            <button id="startTrainingMenu">Start een Training</button>
-            <button id="myTrainings">Mijn Trainingen</button>
-            <button id="myFTP">Mijn FTP</button>
-            <button id="myDevice">Mijn Apparaat</button>
+            <button id="createTraining">Create Training</button>
+            <button id="startTrainingMenu">Start Training</button>
+            <button id="myTrainings">My Trainings</button>
+            <button id="myFTP">My FTP</button>
+            <button id="myDevice">My Device</button>
         </div>
+
+        <!-- Create Training Menu -->
         <div id="createTrainingMenu" style="display: none;">
-            <h2>Maak een nieuwe training</h2>
-            <input type="text" id="trainingName" placeholder="Naam van de training">
+            <h2>Create Training</h2>
+            <input type="text" id="trainingName" placeholder="Training Name">
             <div id="intervals"></div>
-            <button id="addInterval">Voeg Interval Toe</button>
-            <button id="saveTraining">Sla Training Op</button>
-            <button id="backToMenu">Terug naar Menu</button>
+            <button id="addInterval">Add Interval</button>
+            <button id="saveTraining">Save Training</button>
+            <button id="backToMenuFromCreateTraining">Back to Menu</button>
         </div>
+
+        <!-- Start Training Screen -->
         <div id="startTrainingScreen" style="display: none;">
-            <h2>Selecteer een training</h2>
+            <h2>Select Training</h2>
             <select id="trainingSelect"></select>
-            <button id="selectTraining">Selecteer Training</button>
-            <button id="backToMenuFromStart">Terug naar Menu</button>
+            <button id="selectTraining">Select Training</button>
+            <button id="backToMenuFromStartTraining">Back to Menu</button>
         </div>
+
+        <!-- Waiting Screen -->
         <div id="waitingScreen" style="display: none;">
-            <h2 id="selectedTrainingName"></h2>
+            <h2>Training Selected</h2>
+            <p id="selectedTrainingName"></p>
             <button id="startTraining">Start Training</button>
-            <button id="backToMenuFromWait">Terug naar Menu</button>
+            <button id="backToMenuFromWaiting">Back to Menu</button>
         </div>
+
+        <!-- Training Screen -->
         <div id="trainingScreen" style="display: none;">
-            <h2 id="currentIntervalName"></h2>
-            <p>Huidige Wattage: <span id="currentWattage"></span></p>
-            <p>Huidige Cadans: <span id="currentCadence"></span></p>
-            <p>Tijd over voor dit interval: <span id="currentIntervalTime"></span></p>
-            <p>Tijd over voor volledige training: <span id="totalTimeRemaining"></span></p>
-            <div id="upcomingIntervals"></div>
-            <button id="endTraining">Einde Training</button>
+            <h2>Training in Progress</h2>
+            <p>Current Wattage: <span id="currentWattage"></span></p>
+            <p>Current Cadence: <span id="currentCadence"></span></p>
+            <p>Current Interval Time: <span id="currentIntervalTime"></span></p>
+            <p>Total Time Remaining: <span id="totalTimeRemaining"></span></p>
+            <button id="endTraining">End Training</button>
         </div>
+
+        <!-- My FTP Menu -->
         <div id="myFTPMenu" style="display: none;">
-            <h2>Mijn FTP</h2>
-            <input type="number" id="ftpInput" placeholder="FTP (watt)">
-            <button id="saveFTP">Sla FTP op</button>
-            <button id="backToMenuFromFTP">Terug naar Menu</button>
+            <h2>My FTP</h2>
+            <input type="number" id="ftpInput" placeholder="FTP Value (Watts)">
+            <button id="saveFTP">Save FTP</button>
+            <button id="backToMenuFromFTP">Back to Menu</button>
         </div>
+
+        <!-- My Device Menu -->
         <div id="myDeviceMenu" style="display: none;">
-            <h2>Mijn Apparaat</h2>
-            <button id="connectDevice">Verbind met Wahoo KICKR</button>
-            <p id="deviceStatus">Geen apparaat verbonden</p>
-            <button id="backToMenuFromDevice">Terug naar Menu</button>
-        </div>    ,
-            <div id="myTrainingsMenu" style="display: none;">
-                <h2>Mijn Trainingen</h2>
-                <ul id="trainingList"></ul>
-                <button id="backToMenuFromTrainings">Terug naar Menu</button>
-            </div>
-            
+            <h2>My Device</h2>
+            <p id="deviceStatus">No device connected</p>
+            <button id="connectDevice">Connect Device</button>
+            <button id="backToMenuFromDevice">Back to Menu</button>
+        </div>
+
+        <!-- My Trainings Menu -->
+        <div id="myTrainingsMenu" style="display: none;">
+            <h2>My Trainings</h2>
+            <ul id="trainingList"></ul>
+            <button id="backToMenuFromTrainings">Back to Menu</button>
         </div>
     </div>
+
+    <script type="module">
+        import init, { start_erg_mode } from './pkg/kickr_control_wasm.js';
+
+        async function runWasm() {
+            await init();
+            console.log("Wasm initialized");
+        }
+
+        runWasm();
+    </script>
     <script src="app.js"></script>
 </body>
 </html>

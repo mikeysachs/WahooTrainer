@@ -10,39 +10,55 @@ body {
 }
 
 #app {
-    width: 80%;
-    max-width: 600px;
+    width: 300px;
     background: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 button {
     display: block;
     width: 100%;
-    margin-bottom: 10px;
     padding: 10px;
-    font-size: 16px;
+    margin: 10px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
 
 input, select {
     width: 100%;
-    margin-bottom: 10px;
     padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     font-size: 16px;
 }
 
 #intervals .interval {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
-#intervals .interval input {
+#intervals input {
     width: 30%;
 }
 
-#intervals .interval button {
-    width: 10%;
+#intervals button {
+    width: auto;
+    background-color: #dc3545;
+}
+
+#intervals button:hover {
+    background-color: #c82333;
 }
