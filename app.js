@@ -1,3 +1,181 @@
+// Voeg dit bovenaan je app.js toe
+console.log('Script geladen');
+
+document.addEventListener('DOMContentLoaded', async () => {
+    console.log('DOM content loaded');
+    await init(); // Initialize WebAssembly module
+
+    const app = document.getElementById('app');
+    const startMenu = document.getElementById('startMenu');
+    const createTrainingMenu = document.getElementById('createTrainingMenu');
+    const startTrainingScreen = document.getElementById('startTrainingScreen');
+    const waitingScreen = document.getElementById('waitingScreen');
+    const trainingScreen = document.getElementById('trainingScreen');
+    const myFTPMenu = document.getElementById('myFTPMenu');
+    const myDeviceMenu = document.getElementById('myDeviceMenu');
+    const myTrainingsMenu = document.getElementById('myTrainingsMenu');
+
+    // Buttons
+    const createTrainingButton = document.getElementById('createTraining');
+    const startTrainingMenuButton = document.getElementById('startTrainingMenu');
+    const myTrainingsButton = document.getElementById('myTrainings');
+    const myFTPButton = document.getElementById('myFTP');
+    const myDeviceButton = document.getElementById('myDevice');
+    const backToMenuButtons = document.querySelectorAll('[id^=backToMenu]');
+    const addIntervalButton = document.getElementById('addInterval');
+    const saveTrainingButton = document.getElementById('saveTraining');
+    const selectTrainingButton = document.getElementById('selectTraining');
+    const startTrainingButton = document.getElementById('startTraining');
+    const endTrainingButton = document.getElementById('endTraining');
+    const saveFTPButton = document.getElementById('saveFTP');
+    const connectDeviceButton = document.getElementById('connectDevice');
+    const backToMenuFromTrainingsButton = document.getElementById('backToMenuFromTrainings');
+
+    // Voeg logging toe aan event listeners
+    createTrainingButton.addEventListener('click', () => {
+        console.log('Create Training Button Clicked');
+        showCreateTrainingMenu();
+    });
+    startTrainingMenuButton.addEventListener('click', () => {
+        console.log('Start Training Menu Button Clicked');
+        showStartTrainingMenu();
+    });
+    myTrainingsButton.addEventListener('click', () => {
+        console.log('My Trainings Button Clicked');
+        showMyTrainingsMenu();
+    });
+    myFTPButton.addEventListener('click', () => {
+        console.log('My FTP Button Clicked');
+        showMyFTPMenu();
+    });
+    myDeviceButton.addEventListener('click', () => {
+        console.log('My Device Button Clicked');
+        showMyDeviceMenu();
+    });
+    addIntervalButton.addEventListener('click', () => {
+        console.log('Add Interval Button Clicked');
+        addInterval();
+    });
+    saveTrainingButton.addEventListener('click', () => {
+        console.log('Save Training Button Clicked');
+        saveTraining();
+    });
+    selectTrainingButton.addEventListener('click', () => {
+        console.log('Select Training Button Clicked');
+        selectTraining();
+    });
+    startTrainingButton.addEventListener('click', () => {
+        console.log('Start Training Button Clicked');
+        showTrainingScreen();
+    });
+    saveFTPButton.addEventListener('click', () => {
+        console.log('Save FTP Button Clicked');
+        saveFTP();
+    });
+    connectDeviceButton.addEventListener('click', () => {
+        console.log('Connect Device Button Clicked');
+        connectDevice();
+    });
+    endTrainingButton.addEventListener('click', () => {
+        console.log('End Training Button Clicked');
+        showStartMenu();
+    });
+    backToMenuFromTrainingsButton.addEventListener('click', () => {
+        console.log('Back to Menu from Trainings Button Clicked');
+        showStartMenu();
+    });
+
+    backToMenuButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            console.log('Back to Menu Button Clicked');
+            showStartMenu();
+        });
+    });
+
+    document.getElementById('intervals').addEventListener('input', (e) => {
+        const index = e.target.dataset.index;
+        const type = e.target.dataset.type;
+        intervals[index][type] = e.target.value;
+        console.log(`Interval ${index} updated: ${type} = ${e.target.value}`);
+    });
+
+    document.getElementById('intervals').addEventListener('click', (e) => {
+        if (e.target.classList.contains('removeInterval')) {
+            const index = e.target.dataset.index;
+            removeInterval(index);
+            console.log(`Interval ${index} removed`);
+        }
+    });
+
+    // Load initial data
+    if (ftp) {
+        ftpInput.value = ftp;
+    }
+    if (trainings.length > 0) {
+        populateTrainingSelect();
+    }
+});
+
+function showStartMenu() {
+    console.log('Showing Start Menu');
+    document.getElementById('startMenu').style.display = 'block';
+    document.getElementById('createTrainingMenu').style.display = 'none';
+    document.getElementById('startTrainingScreen').style.display = 'none';
+    document.getElementById('waitingScreen').style.display = 'none';
+    document.getElementById('trainingScreen').style.display = 'none';
+    document.getElementById('myFTPMenu').style.display = 'none';
+    document.getElementById('myDeviceMenu').style.display = 'none';
+    document.getElementById('myTrainingsMenu').style.display = 'none';
+}
+
+function showCreateTrainingMenu() {
+    console.log('Showing Create Training Menu');
+    document.getElementById('startMenu').style.display = 'none';
+    document.getElementById('createTrainingMenu').style.display = 'block';
+    intervals = [];
+    updateIntervals();
+}
+
+function showStartTrainingMenu() {
+    console.log('Showing Start Training Menu');
+    document.getElementById('startMenu').style.display = 'none';
+    document.getElementById('startTrainingScreen').style.display = 'block';
+    populateTrainingSelect();
+}
+
+function showWaitingScreen() {
+    console.log('Showing Waiting Screen');
+    document.getElementById('startMenu').style.display = 'none';
+    document.getElementById('waitingScreen').style.display = 'block';
+}
+
+function showTrainingScreen() {
+    console.log('Showing Training Screen');
+    document.getElementById('waitingScreen').style.display = 'none';
+    document.getElementById('trainingScreen').style.display = 'block';
+    runNextInterval();
+}
+
+function showMyFTPMenu() {
+    console.log('Showing My FTP Menu');
+    document.getElementById('startMenu').style.display = 'none';
+    document.getElementById('myFTPMenu').style.display = 'block';
+    ftpInput.value = ftp;
+}
+
+function showMyDeviceMenu() {
+    console.log('Showing My Device Menu');
+    document.getElementById('startMenu').style.display = 'none';
+    document.getElementById('myDeviceMenu').style.display = 'block';
+}
+
+function showMyTrainingsMenu() {
+    console.log('Showing My Trainings Menu');
+    document.getElementById('startMenu').style.display = 'none';
+    document.getElementById('myTrainingsMenu').style.display = 'block';
+    populateTrainingList();
+}
+
 import init, { start_erg_mode } from './pkg/kickr_control_wasm.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
