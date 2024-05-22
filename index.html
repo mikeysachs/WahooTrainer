@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<script type="module">
+    import init, { start_erg_mode } from './pkg/kickr_control_wasm.js';
+
+    async function runWasm() {
+        await init();
+        start_erg_mode(200); // Example usage
+    }
+
+    runWasm();
+</script>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wahoo KICKR Training</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <div id="startMenu">
+            <button id="createTraining">Maak Training</button>
+            <button id="startTrainingMenu">Start een Training</button>
+            <button id="myTrainings">Mijn Trainingen</button>
+            <button id="myFTP">Mijn FTP</button>
+            <button id="myDevice">Mijn Apparaat</button>
+        </div>
+        <div id="createTrainingMenu" style="display: none;">
+            <h2>Maak een nieuwe training</h2>
+            <input type="text" id="trainingName" placeholder="Naam van de training">
+            <div id="intervals"></div>
+            <button id="addInterval">Voeg Interval Toe</button>
+            <button id="saveTraining">Sla Training Op</button>
+            <button id="backToMenu">Terug naar Menu</button>
+        </div>
+        <div id="startTrainingScreen" style="display: none;">
+            <h2>Selecteer een training</h2>
+            <select id="trainingSelect"></select>
+            <button id="selectTraining">Selecteer Training</button>
+            <button id="backToMenuFromStart">Terug naar Menu</button>
+        </div>
+        <div id="waitingScreen" style="display: none;">
+            <h2 id="selectedTrainingName"></h2>
+            <button id="startTraining">Start Training</button>
+            <button id="backToMenuFromWait">Terug naar Menu</button>
+        </div>
+        <div id="trainingScreen" style="display: none;">
+            <h2 id="currentIntervalName"></h2>
+            <p>Huidige Wattage: <span id="currentWattage"></span></p>
+            <p>Huidige Cadans: <span id="currentCadence"></span></p>
+            <p>Tijd over voor dit interval: <span id="currentIntervalTime"></span></p>
+            <p>Tijd over voor volledige training: <span id="totalTimeRemaining"></span></p>
+            <div id="upcomingIntervals"></div>
+            <button id="endTraining">Einde Training</button>
+        </div>
+        <div id="myFTPMenu" style="display: none;">
+            <h2>Mijn FTP</h2>
+            <input type="number" id="ftpInput" placeholder="FTP (watt)">
+            <button id="saveFTP">Sla FTP op</button>
+            <button id="backToMenuFromFTP">Terug naar Menu</button>
+        </div>
+        <div id="myDeviceMenu" style="display: none;">
+            <h2>Mijn Apparaat</h2>
+            <button id="connectDevice">Verbind met Wahoo KICKR</button>
+            <p id="deviceStatus">Geen apparaat verbonden</p>
+            <button id="backToMenuFromDevice">Terug naar Menu</button>
+        </div>    ,
+            <div id="myTrainingsMenu" style="display: none;">
+                <h2>Mijn Trainingen</h2>
+                <ul id="trainingList"></ul>
+                <button id="backToMenuFromTrainings">Terug naar Menu</button>
+            </div>
+            
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+/workspaces/WahooTrainer/kickr_control_wasm/target/release/deps/libwasm_bindgen_macro_support-ea9422254af57f7c.rmeta: /home/codespace/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-macro-support-0.2.92/src/lib.rs /home/codespace/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-macro-support-0.2.92/src/parser.rs
+
+/workspaces/WahooTrainer/kickr_control_wasm/target/release/deps/libwasm_bindgen_macro_support-ea9422254af57f7c.rlib: /home/codespace/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-macro-support-0.2.92/src/lib.rs /home/codespace/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-macro-support-0.2.92/src/parser.rs
+
+/workspaces/WahooTrainer/kickr_control_wasm/target/release/deps/wasm_bindgen_macro_support-ea9422254af57f7c.d: /home/codespace/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-macro-support-0.2.92/src/lib.rs /home/codespace/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-macro-support-0.2.92/src/parser.rs
+
+/home/codespace/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-macro-support-0.2.92/src/lib.rs:
+/home/codespace/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-macro-support-0.2.92/src/parser.rs:
